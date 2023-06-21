@@ -2,7 +2,10 @@
 param(
     # You may optinally run this script with the '-DownloadZip' flat to download a zip file containing the Bitcoin executables.
     # The default behaviour is to download and verify the setup instead.
-    [switch]$DownloadZip=$false
+    [switch]$DownloadZip=$false,
+
+    # The version of Bitcoin Core which will be downloaded.
+    [string]$CoreVersion = "25.0"
 );
 
 # Check whether Chocolatey is installed.
@@ -30,12 +33,12 @@ if ($LASTEXITCODE -ne 0)
 
 if ($DownloadZip)
 {
-    $downloadPath="https://bitcoincore.org/bin/bitcoin-core-25.0/bitcoin-25.0-win64.zip";
+    $downloadPath="https://bitcoincore.org/bin/bitcoin-core-$coreVersion/bitcoin-$coreVersion-win64.zip";
     $outputPath="./bitcoin-core-winx64.zip";
 }
 else
 {
-    $downloadPath="https://bitcoincore.org/bin/bitcoin-core-25.0/bitcoin-25.0-win64-setup.exe";
+    $downloadPath="https://bitcoincore.org/bin/bitcoin-core-$coreVersion/bitcoin-$coreVersion-win64-setup.exe";
     $outputPath="./bitcoin-core-setup-winx64.exe";
 }
 
@@ -49,7 +52,7 @@ if ($LASTEXITCODE -ne 0)
 
 $shaSumsFile = "./SHA256SUMS";
 # Download Bitcoin Core's expected binary SHA256 hashes.
-Invoke-WebRequest -Uri "https://bitcoincore.org/bin/bitcoin-core-25.0/SHA256SUMS" -OutFile $shaSumsFile;
+Invoke-WebRequest -Uri "https://bitcoincore.org/bin/bitcoin-core-$coreVersion/SHA256SUMS" -OutFile $shaSumsFile;
 if ($LASTEXITCODE -ne 0)
 { # Bitcoin Core SHASUMS download failed.
     echo "Failed to download Bitcoin Core SHASUMS. Please raise an issue in the GitHub repository containing this script.";
@@ -76,7 +79,6 @@ else
 # Read the expected hash for the downloaded file.
 $shaSum = $shaSums[$shaSumIndex].Split(" ")[0];
 
-
 # Hash the downloaded file.
 $hash = (Get-FileHash -Path $outputPath -Algorithm "SHA256").Hash;
 
@@ -90,3 +92,8 @@ else {
     # Print the hash for your convenience.
     echo "The file hash is '$hash'.";
 }
+
+$signatureFile = "./SHA256SUMS.asc";
+Invoke-WebRequest -Uri "https://bitcoincore.org/bin/bitcoin-core-$coreVersion/SHA256SUMS.asc" -OutFile $signatureFile;
+
+
