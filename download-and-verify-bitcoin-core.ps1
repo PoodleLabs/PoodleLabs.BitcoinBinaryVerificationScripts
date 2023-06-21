@@ -47,11 +47,46 @@ if ($LASTEXITCODE -ne 0)
     return $LASTEXITCODE;
 }
 
+$shaSumsFile = "./SHA256SUMS";
 # Download Bitcoin Core's expected binary SHA256 hashes.
-Invoke-WebRequest -Uri "https://bitcoincore.org/bin/bitcoin-core-25.0/SHA256SUMS" -OutFile "./SHA256SUMS";
+Invoke-WebRequest -Uri "https://bitcoincore.org/bin/bitcoin-core-25.0/SHA256SUMS" -OutFile $shaSumsFile;
 if ($LASTEXITCODE -ne 0)
 { # Bitcoin Core SHASUMS download failed.
     echo "Failed to download Bitcoin Core SHASUMS. Please raise an issue in the GitHub repository containing this script.";
     return $LASTEXITCODE;
 }
 
+# Read the SHASUMS file
+$shaSums = Get-Content -Path $shaSumsFile;
+if ($LASTEXITCODE -ne 0)
+{ # Failed to read Bitcoin Core SHASUMS.
+    echo "Failed to read Bitcoin Core SHASUMS. Please raise an issue in the GitHub repository containing this script.";
+    return $LASTEXITCODE;
+}
+
+if ($DownloadZip)
+{
+    $shaSumIndex = 26;
+}
+else
+{
+    $shaSumIndex = 22;
+}
+
+# Read the expected hash for the downloaded file.
+$shaSum = $shaSums[$shaSumIndex].Split(" ")[0];
+
+
+# Hash the downloaded file.
+$hash = (Get-FileHash -Path $outputPath -Algorithm "SHA256").Hash;
+
+# Compare the actual hash with the expected hash.
+if ($shaSum -ne $hash) {
+    # The hashes don't match!
+    echo "Expected filehash '$shaSum', got '$hash'. Something is wrong; either you've fallen victim to an attack, or something is broken in the script for your environment. Please raise an issue in the GitHub repository containing this script.";
+    return $LASTEXITCODE;
+}
+else {
+    # Print the hash for your convenience.
+    echo "The file hash is '$hash'.";
+}
