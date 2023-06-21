@@ -47,3 +47,11 @@ if ($LASTEXITCODE -ne 0)
     return $LASTEXITCODE;
 }
 
+# Download Bitcoin Core's expected binary SHA256 hashes.
+Invoke-WebRequest -Uri "https://bitcoincore.org/bin/bitcoin-core-25.0/SHA256SUMS" -OutFile "./SHA256SUMS";
+if ($LASTEXITCODE -ne 0)
+{ # Bitcoin Core SHASUMS download failed.
+    echo "Failed to download Bitcoin Core SHASUMS. Please raise an issue in the GitHub repository containing this script.";
+    return $LASTEXITCODE;
+}
+
