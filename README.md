@@ -21,3 +21,5 @@ Remember: blindly running this script is not verification. You're simply trustin
 ## Contributions
 
 Contributions are welcome. Improvements to existing content, as well as additional scripts which fit in this repository (eg: the same thing for other operating systems). I intend to add more at some point, but given those who most need this script are likely using Windows, I feel this is a good starting point.
+
+I would like to kill the dependency on Chocolatey, but I threw this repository together quickly late at night; if you see this before I get around to fixing it, I'd greatly appreciate such a contribution.
