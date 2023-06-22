@@ -8,7 +8,7 @@ You will need to import one or more Bitcoin Core contributors' keys. To do this,
 
 You should compare the script with the content under 'Windows verification instructions` at https://bitcoincore.org/en/download/.
 
-Remember: blindly running this script is not verification. You're simply trusting me, the author, unless you actually *check* what it's doing.
+Remember: blindly running this script is not verification. You're simply trusting me, the author, unless you actually *check* what it's doing. The script is documented almost line by line, and if you have *any* questions about what a particular line is doing, you should raise an issue.
 
 ## Usage
 
