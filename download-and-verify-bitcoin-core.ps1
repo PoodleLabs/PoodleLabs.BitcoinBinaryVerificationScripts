@@ -93,7 +93,14 @@ else {
     echo "The file hash is '$hash'.";
 }
 
+# Download the signatures.
 $signatureFile = "./SHA256SUMS.asc";
 Invoke-WebRequest -Uri "https://bitcoincore.org/bin/bitcoin-core-$coreVersion/SHA256SUMS.asc" -OutFile $signatureFile;
+if ($LASTEXITCODE -ne 0)
+{ # Failed to download Bitcoin Core SHASUMS signatures.
+    echo "Failed to read Bitcoin Core SHASUMS signatures. Please raise an issue in the GitHub repository containing this script.";
+    return $LASTEXITCODE;
+}
 
-
+# Verify the signatures; you need to actually read the output here!
+gpg --verify $signatureFile
