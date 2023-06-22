@@ -2,6 +2,14 @@
 
 This repository contains a Windows PowerShell script which automatically installs Chocolatey package manager, installs GPG4Win via Chocolatey, downloads the current (or specified version) of Bitcoin Core (by default, the setup executable, optionally the zip file), the expected SHA256 hash for each file, the signatures file for the hashes, and calls `gpg --verify`.
 
+## Keys
+
+You will need to import one or more Bitcoin Core contributors' keys. To do this, run the script once to ensure GPG4Win is installed, obtain some `.gpg` files for the developers whose keys you want to use (this repository's `keys` folder contains a mirror of the keys contained in https://github.com/bitcoin-core/guix.sigs/tree/main/builder-keys; please read the [readme](./keys/README.md) if you intend on using them), and run `gpg --import [FULLY QUALIFIED FILE PATH FOR THE KEY YOU WANT TO IMPORT]` (eg: `gpg --import ./keys/achow101.gpg` from this directory), then run the script again and verify the signatures pass for each key you imported. For example, if you imported Andrew Chow's key, the output of the script should include `Good signature from "Andrew Chow <andrew@achow101.com>"`.
+
+You should compare the script with the content under 'Windows verification instructions` at https://bitcoincore.org/en/download/.
+
+Remember: blindly running this script is not verification. You're simply trusting me, the author, unless you actually *check* what it's doing.
+
 ## Usage
 
 1. Open PowerShell as an administrator.
@@ -10,4 +18,6 @@ This repository contains a Windows PowerShell script which automatically install
 4. Type `download-and-verify-bitcoin-core.ps1`. Optionally you may add the `DownloadZip` flag (eg: `download-and-verify-bitcoin-core.ps1 -DownloadZip`) to download a zip file containing the Bitcoin Core binaries, rather than installer, and you may specify a Bitcoin Core version with the `CoreVersion` flag (eg: `download-and-verify-bitcoin-core.ps1 -CoreVersion "24.0"`).
 5. Read the output.
 
-You will need to import one or more Bitcoin Core contributors' keys. To do this, run the script once to ensure GPG4Win is installed, obtain some `.gpg` files for the developers whose keys you want to use (this repository's `keys` folder contains a mirror of the keys contained in https://github.com/bitcoin-core/guix.sigs/tree/main/builder-keys; please read the [readme](./keys/README.md) if you intend on using them), and run `gpg --import [FULLY QUALIFIED FILE PATH FOR THE KEY YOU WANT TO IMPORT]` (eg: `gpg --import ./keys/achow101.gpg` from this directory), then run the script again and verify the signatures pass for each key you imported. For example, if you imported Andrew Chow's key, the output of the script should include `Good signature from "Andrew Chow <andrew@achow101.com>"`.
+## Contributions
+
+Contributions are welcome. Improvements to existing content, as well as additional scripts which fit in this repository (eg: the same thing for other operating systems). I intend to add more at some point, but given those who most need this script are likely using Windows, I feel this is a good starting point.
