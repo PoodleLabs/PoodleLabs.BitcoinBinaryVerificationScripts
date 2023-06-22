@@ -8,7 +8,7 @@ You will need to import one or more Bitcoin Core contributors' keys. To do this,
 
 You should compare the script with the content under `Windows verification instructions` at https://bitcoincore.org/en/download/.
 
-Remember: blindly running this script is not verification. You're simply trusting me, the author, unless you actually *check* what it's doing. [The script](https://github.com/PoodleLabs/PoodleLabs.BitcoinBinaryVerificationScripts/blob/master/download-and-verify-bitcoin-core.ps1) is documented almost line by line, and if you have *any* questions about what a particular line is doing, you should raise an issue.
+Remember: blindly running this script is not verification. You're simply trusting me, the author, unless you actually *check* what it's doing. The script ([1](https://github.com/PoodleLabs/PoodleLabs.BitcoinBinaryVerificationScripts/blob/master/download-and-verify-bitcoin-core.ps1), [2](https://github.com/PoodleLabs/PoodleLabs.BitcoinBinaryVerificationScripts/blob/master/download-and-verify-bitcoin-core-preinstalled-gpg.ps1)) is documented almost line by line, and if you have *any* questions about what a particular line is doing, you should raise an issue.
 
 ## Usage
 
@@ -17,6 +17,8 @@ Remember: blindly running this script is not verification. You're simply trustin
 3. Type `cd [PATH TO REPOSITORY]` where `[PATH TO REPOSITORY]`is the fully qualified directory name for your local copy of the repository, for example `cd C:/users/Isaac/downloads/PoodleLabs.BitcoinBinaryVerificationScripts`.
 4. Type `download-and-verify-bitcoin-core.ps1`. Optionally you may add the `DownloadZip` flag (eg: `download-and-verify-bitcoin-core.ps1 -DownloadZip`) to download a zip file containing the Bitcoin Core binaries, rather than installer, and you may specify a Bitcoin Core version with the `CoreVersion` flag (eg: `download-and-verify-bitcoin-core.ps1 -CoreVersion "24.0"`).
 5. Read the output.
+
+Note: if you already have GPG4Win installed, you may run the `download-and-verify-bitcoin-core-preinstalled-gpg.ps1` script instead.
 
 ## Contributions
 
