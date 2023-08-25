@@ -2,21 +2,20 @@
 param(
     # You may optinally run this script with the '-DownloadZip' flat to download a zip file containing the Bitcoin executables.
     # The default behaviour is to download and verify the setup instead.
-    [switch]$DownloadZip=$false,
+    [switch]$DownloadZip = $false,
 
     # The version of Bitcoin Core which will be downloaded.
     [string]$CoreVersion = "25.0"
 );
+$ErrorActionPreference = "Stop";
 
-if ($DownloadZip)
-{
-    $downloadPath="https://bitcoincore.org/bin/bitcoin-core-$coreVersion/bitcoin-$coreVersion-win64.zip";
-    $outputPath="./bitcoin-core-winx64.zip";
+if ($DownloadZip) {
+    $downloadPath = "https://bitcoincore.org/bin/bitcoin-core-$coreVersion/bitcoin-$coreVersion-win64.zip";
+    $outputPath = "./bitcoin-core-winx64.zip";
 }
-else
-{
-    $downloadPath="https://bitcoincore.org/bin/bitcoin-core-$coreVersion/bitcoin-$coreVersion-win64-setup.exe";
-    $outputPath="./bitcoin-core-setup-winx64.exe";
+else {
+    $downloadPath = "https://bitcoincore.org/bin/bitcoin-core-$coreVersion/bitcoin-$coreVersion-win64-setup.exe";
+    $outputPath = "./bitcoin-core-setup-winx64.exe";
 }
 
 # Download Bitcoin Core's setup, or zip file from BitcoinCore.org
@@ -29,12 +28,10 @@ Invoke-WebRequest -Uri "https://bitcoincore.org/bin/bitcoin-core-$coreVersion/SH
 # Read the SHASUMS file
 $shaSums = Get-Content -Path $shaSumsFile;
 
-if ($DownloadZip)
-{
+if ($DownloadZip) {
     $shaSumIndex = 26;
 }
-else
-{
+else {
     $shaSumIndex = 22;
 }
 
