@@ -10,10 +10,10 @@ param(
     # The version of GPG 4 Win which will be downloaded, if GPG is not already installed.
     [string]$Gpg4WinVersion = "4.2.0"
 );
-$ErrorActionPreference = "Stop";
 
 # Check whether GPG is installed.
 gpg --version
+$ErrorActionPreference = "Stop";
 if ($LASTEXITCODE -ne 0) {
     # Failed to run `gpg --version`; gpg is (probably) not installed.
 

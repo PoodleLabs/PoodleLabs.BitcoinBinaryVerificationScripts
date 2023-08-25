@@ -14,7 +14,8 @@ Remember: blindly running this script is not verification. You're simply trustin
 
 1. Open PowerShell as an administrator.
 2. Download this repository, either via `git clone https://github.com/PoodleLabs/PoodleLabs.BitcoinBinaryVerificationScripts`, or by downloading and extracting a zip file of the current source code via the GitHub UI (in the case of downloading a zip file, extract it somewhere).
-3. Type `cd [PATH TO REPOSITORY]` where `[PATH TO REPOSITORY]`is the fully qualified directory name for your local copy of the repository, for example `cd C:/users/Isaac/downloads/PoodleLabs.BitcoinBinaryVerificationScripts`.
+3. Enable scripts for the current process with `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process` and confirm.
+4. Type `cd [PATH TO REPOSITORY]` where `[PATH TO REPOSITORY]`is the fully qualified directory name for your local copy of the repository, for example `cd C:/users/Isaac/downloads/PoodleLabs.BitcoinBinaryVerificationScripts`.
 4. Type `download-and-verify-bitcoin-core.ps1`. Optionally you may add the `DownloadZip` flag (eg: `download-and-verify-bitcoin-core.ps1 -DownloadZip`) to download a zip file containing the Bitcoin Core binaries, rather than installer, and you may specify a Bitcoin Core version with the `CoreVersion` flag (eg: `download-and-verify-bitcoin-core.ps1 -CoreVersion "24.0"`), or a GPG 4 Win version with the `Gpg4WinVersion` flag (note: this will only do something if GPG is not already installed and on your path). 
 5. Read the output.
 
