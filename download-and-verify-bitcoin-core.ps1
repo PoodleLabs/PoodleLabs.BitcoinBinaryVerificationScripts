@@ -25,13 +25,13 @@ if ($LASTEXITCODE -ne 0) {
     # Download Bitcoin Core's setup, or zip file from BitcoinCore.org
     Invoke-WebRequest -Uri $downloadPath -OutFile $outputPath;
 
-    echo "Downloaded GPG 4 Win installer, located at '$outputPath'.";
-    echo "Please check the file's certificate:"
-    echo "    - Right click";
-    echo "    - Select 'Properties'";
-    echo "    - Open the 'Digital Certificates' tab";
-    echo "    - Check the issuer is GlobalSign GCC R45 CodeSigning CA 2020";
-    echo "Press any key to continue...";
+    Write-Output "Downloaded GPG 4 Win installer, located at '$outputPath'.";
+    Write-Output "Please check the file's certificate:"
+    Write-Output "    - Right click";
+    Write-Output "    - Select 'Properties'";
+    Write-Output "    - Open the 'Digital Certificates' tab";
+    Write-Output "    - Check the issuer is GlobalSign GCC R45 CodeSigning CA 2020";
+    Write-Output "Press any key to continue...";
 
     # Read a keypress and discard it.
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
@@ -42,9 +42,9 @@ if ($LASTEXITCODE -ne 0) {
     # Refresh the PATH environment variable to make sure `gpg` will work in later calls.
     $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine");
 
-    echo "Installed GPG4Windows.";
-    echo "Please read the 'Keys' section of the README and install a certificate you trust for validating the Bitcoin Core binary releases.";
-    echo "Press any key to continue...";
+    Write-Output "Installed GPG4Windows.";
+    Write-Output "Please read the 'Keys' section of the README and install a certificate you trust for validating the Bitcoin Core binary releases.";
+    Write-Output "Press any key to continue...";
 
     # Read a keypress and discard it.
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');

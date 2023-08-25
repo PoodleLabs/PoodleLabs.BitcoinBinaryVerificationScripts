@@ -46,12 +46,12 @@ $hash = (Get-FileHash -Path $outputPath -Algorithm "SHA256").Hash;
 # Compare the actual hash with the expected hash.
 if ($shaSum -ne $hash) {
     # The hashes don't match!
-    echo "Expected filehash '$shaSum', got '$hash'. Something is wrong; either you've fallen victim to an attack, or something is broken in the script for your environment. Please raise an issue in the GitHub repository containing this script.";
+    Write-Output "Expected filehash '$shaSum', got '$hash'. Something is wrong; either you've fallen victim to an attack, or something is broken in the script for your environment. Please raise an issue in the GitHub repository containing this script.";
     return 1;
 }
 else {
     # Print the hash for your convenience.
-    echo "The file hash is '$hash'.";
+    Write-Output "The file hash is '$hash'.";
 }
 
 # Download the signatures.
