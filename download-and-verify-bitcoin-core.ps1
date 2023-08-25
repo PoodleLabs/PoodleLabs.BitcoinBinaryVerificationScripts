@@ -32,7 +32,8 @@ if ($LASTEXITCODE -ne 0) {
     echo "Press any key to continue...";
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
-    Start-Process "$outputPath " -NoNewWindow -Wait
+    Start-Process -NoNewWindow -Wait "$outputPath";
+    $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine");
 }
 
 ./download-and-verify-bitcoin-core-preinstalled-gpg.ps1 -DownloadZip $DownloadZip -CoreVersion $CoreVersion
