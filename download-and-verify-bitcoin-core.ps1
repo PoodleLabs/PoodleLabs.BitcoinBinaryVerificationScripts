@@ -50,4 +50,5 @@ if ($LASTEXITCODE -ne 0) {
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 }
 
+# Continue on to download and verify Bitcoin Core. Please read the following script too!
 ./download-and-verify-bitcoin-core-preinstalled-gpg.ps1 -DownloadZip $DownloadZip -CoreVersion $CoreVersion
