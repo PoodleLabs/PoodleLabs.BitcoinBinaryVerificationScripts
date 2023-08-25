@@ -43,7 +43,7 @@ if ($LASTEXITCODE -ne 0) {
     $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine");
 
     echo "Installed GPG4Windows.";
-    echo "Please read the README and install a certificate you trust for validating the Bitcoin Core binary releases.";
+    echo "Please read the 'Keys' section of the README and install a certificate you trust for validating the Bitcoin Core binary releases.";
     echo "Press any key to continue...";
 
     # Read a keypress and discard it.
