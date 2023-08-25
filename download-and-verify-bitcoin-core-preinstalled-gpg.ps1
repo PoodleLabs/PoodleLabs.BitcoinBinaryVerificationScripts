@@ -7,6 +7,8 @@ param(
     # The version of Bitcoin Core which will be downloaded.
     [string]$CoreVersion = "25.0"
 );
+
+# Any error should just terminate the script.
 $ErrorActionPreference = "Stop";
 
 if ($DownloadZip) {
@@ -45,7 +47,7 @@ $hash = (Get-FileHash -Path $outputPath -Algorithm "SHA256").Hash;
 if ($shaSum -ne $hash) {
     # The hashes don't match!
     echo "Expected filehash '$shaSum', got '$hash'. Something is wrong; either you've fallen victim to an attack, or something is broken in the script for your environment. Please raise an issue in the GitHub repository containing this script.";
-    return $LASTEXITCODE;
+    return 1;
 }
 else {
     # Print the hash for your convenience.

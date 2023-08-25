@@ -13,6 +13,8 @@ param(
 
 # Check whether GPG is installed.
 gpg --version
+
+# Any error should just terminate the script from this point.
 $ErrorActionPreference = "Stop";
 if ($LASTEXITCODE -ne 0) {
     # Failed to run `gpg --version`; gpg is (probably) not installed.
@@ -30,9 +32,14 @@ if ($LASTEXITCODE -ne 0) {
     echo "    - Open the 'Digital Certificates' tab";
     echo "    - Check the issuer is GlobalSign GCC R45 CodeSigning CA 2020";
     echo "Press any key to continue...";
+
+    # Read a keypress and discard it.
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
+    # Start the installer for GPG 4 Win.
     Start-Process -NoNewWindow -Wait "$outputPath";
+
+    # Refresh the PATH environment variable to make sure `gpg` will work in later calls.
     $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine");
 }
 
