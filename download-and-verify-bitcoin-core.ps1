@@ -41,6 +41,13 @@ if ($LASTEXITCODE -ne 0) {
 
     # Refresh the PATH environment variable to make sure `gpg` will work in later calls.
     $Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine");
+
+    echo "Installed GPG4Windows.";
+    echo "Please read the README and install a certificate you trust for validating the Bitcoin Core binary releases.";
+    echo "Press any key to continue...";
+
+    # Read a keypress and discard it.
+    $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 }
 
 ./download-and-verify-bitcoin-core-preinstalled-gpg.ps1 -DownloadZip $DownloadZip -CoreVersion $CoreVersion
