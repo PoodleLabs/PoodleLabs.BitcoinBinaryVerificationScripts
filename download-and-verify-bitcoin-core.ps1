@@ -51,4 +51,4 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 # Continue on to download and verify Bitcoin Core. Please read the following script too!
-./download-and-verify-bitcoin-core-preinstalled-gpg.ps1 -DownloadZip $DownloadZip -CoreVersion $CoreVersion
+./download-and-verify-bitcoin-core-preinstalled-gpg.ps1 -DownloadZip:$DownloadZip -CoreVersion $CoreVersion
