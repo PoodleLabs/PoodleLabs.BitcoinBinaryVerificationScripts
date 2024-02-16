@@ -1,3 +1,5 @@
+**NOTE: PoodleLabs is moving homes to a self-hosted GitHub alternative; these repositories have been left up for posterity, and will not be updated**
+
 # Bitcoin Core Verification Script
 
 This repository contains a Windows PowerShell script which installs GPG4Win (default: v4.2.0), downloads Bitcoin Core (by default, the setup executable, optionally the zip file, defaults to v25.0), the expected SHA256 hash for each file, the signatures file for the hashes, and calls `gpg --verify`.
